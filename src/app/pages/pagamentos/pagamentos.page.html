@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Pagamentos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div *ngFor="let item of itens">
+  
+    <ion-item>
+      <ion-label position="floating">Ticket:</ion-label>
+      <ion-input [(ngModel)]="item.ticket" disabled="true"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Data</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" min="2019" max="2020" value="02-09-2019" [(ngModel)]="item.data"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Entrada:</ion-label>
+      <ion-datetime displayFormat="HH:mm" [(ngModel)]="item.entrada"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Saida:</ion-label>
+      <ion-datetime displayFormat="HH:mm" [(ngModel)]="item.saida"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Placa:</ion-label>
+      <ion-input [(ngModel)]="item.placa"></ion-input>
+    </ion-item>
+
+    <br/>
+
+    <div class="text_Center">
+      <ion-label><b>Valor:</b></ion-label>
+      <ion-input [(ngModel)]="item.valor" [value]="calculaValor(item.entrada,item.saida)" placeholder="0.00" disabled="true"></ion-input>
+
+      <ion-label><b>Status:</b></ion-label>
+      <ion-input [(ngModel)]="item.status" [value]="status" disabled="true"></ion-input>
+      
+
+      <ion-button color="danger" [routerLink]="['/lista']">Voltar</ion-button>
+
+      <ion-button color="success" (click)="clickPagar()">PAGAR</ion-button>    
+    </div>
+
+  </div>
+  
+</ion-content>

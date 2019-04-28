@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Lista de Veículos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+  <ion-refresher-content></ion-refresher-content>
+</ion-refresher>
+
+<!-- Animated Searchbar -->
+<ion-searchbar type="tel" animated  placeholder="Pesquisar ticket" 
+[(ngModel)]="searchTerm"
+(ionChange)="setFilteredItems()">
+</ion-searchbar>
+
+    <ion-list>
+      <ion-item *ngFor="let item of itens" [routerLink]="['/pagamentos', {id: item.id}]">
+        <ion-label>
+          <ion-badge *ngIf="item.status == 'A pagar'" color="danger">{{item.status}}</ion-badge>
+          <ion-badge *ngIf="item.status == 'Pago'" color="success">{{item.status}}</ion-badge>
+          <br/>
+          <b>Ticket: </b> {{item.ticket}}
+          <br /> 
+          <b>Placa: </b> {{item.placa}} 
+          <br />
+          <b>Data:</b> {{item.data}}
+          <br />
+          <b>Valor: </b> {{item.valor}} 
+          <br/>
+          <b>Entrada: </b>{{item.entrada}} | <b>Saída: </b>{{item.saida}}
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+</ion-content>
